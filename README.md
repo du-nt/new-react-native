@@ -1,79 +1,109 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## 前提条件
 
-# Getting Started
+1. [Node.js](https://nodejs.org/en/) (v18)をインストールする
+2. [yarn](https://yarnpkg.com/getting-started/install)をインストールする
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## はじめに
 
-## Step 1: Start the Metro Server
+1. `git clone https://@bitbucket.org/work-house/digitori360-app.git`
+2. `cd digitori360-app`
+3. 下記ポートフォワーディングする
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- DEV
 
-To start Metro, run the following command from the _root_ of your React Native project:
+  1. ルート ディレクトリに[.env.local](google.com)ファイルを作成する
 
-```bash
-# using npm
-npm start
+     ```bash
+     # 依存関係をインストールする
+     $ yarn install
 
-# OR using Yarn
-yarn start
+     # コマンド実行
+     $ yarn start
+     ```
+
+  2. [DEV のアカウントと ID](google.com)でログインする
+
+- PRO
+
+  1. ルート ディレクトリに[.env.production.local](google.com)ファイルを作成する
+
+     ```bash
+     # ソースコードをビルドする
+     $ yarn build
+
+     # コマンド実行
+     $ serve -s build
+     ```
+
+  2. [PRO のアカウントと ID](google.com)でログインする
+
+## Git フロー
+
+1. develop から開発ブランチを切ります
+
+- 通常タスク: `git branch feature/<タスク ID>/ブランチ名`
+- バグ修正タスク: `git branch bugfix/<バグ ID>/ブランチ名`
+
+2. ESLint でコードを修正
+3. 実装できたら commit/push
+4. PR 作成(develop に向けて下さい)
+5. reviewer に review 依頼(テストケース作成を依頼したときはテストケースのレビューも粂に投げて下さい)
+
+### コミットのメッセージ
+
+`[タスク ID]: <メッセージ>`
+
+```
+fix：バグ修正
+add：新しい機能の追加
+update：機能の更新
+change：仕様変更
+clean：整理（リファクタリングなど）
 ```
 
-## Step 2: Start your Application
+### PR
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+`[タスク ID] <プルリクエストのタイトル>`
 
-### For Android
+## ディレクトリ構造
 
-```bash
-# using npm
-npm run android
+### 概要
 
-# OR using Yarn
-yarn android
+```
+├── assets
+├── src
+│   ├── components
+│   │   ├── atoms
+│   │   ├── molecules
+│   │   ├── organisms
+│   │   └── templates
+│   ├── screens
+│   ├── navigators
+│   ├── constants
+│   ├── hooks
+│   ├── locales
+│   ├── services
+│   ├── store
+│   ├── types
+│   └── utils
+├── package.json
+└── README.md
 ```
 
-### For iOS
+### 詳細
 
-```bash
-# using npm
-npm run ios
+- **assets** - 公開ファイル(画像、ファビコンなど)が含まれます
+- **src** - すべてのコードが含まれています
+  - **components** - コンポーネント
+  - **screens** - ページ
+  - **navigators** - ルート
+  - **constants** - 定数の定義
+  - **hooks** - カスタムフック
+  - **locales** - 多言語翻訳
+  - **services** - API 連携サービス
+  - **store** - グローバルストア
+  - **types** - Typescript のタイプ及び列挙の定義
+  - **utils** - ヘルパー関数(ソート、フィルタリングなど)
+- **package.json** - プロジェクトの依存関係が含まれています
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## ライセンス

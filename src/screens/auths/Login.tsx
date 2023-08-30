@@ -5,7 +5,7 @@ import tw from 'twrnc';
 import {AuthStacksProps} from 'types';
 
 export default function Login({navigation}: AuthStacksProps) {
-  const {login} = useAuth({revalidateOnMount: false});
+  const {login} = useAuth();
 
   return (
     <View>

@@ -1,6 +1,6 @@
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import RootStacks from 'navigators/Stacks/RootStacks';
+import RootStacks from 'navigators/stacks/RootStacks';
 import Article from 'screens/drawers/Article';
 import Feed from 'screens/drawers/Feed';
 import {IconProps} from 'types';

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import {Button, Menu, Snackbar, Text, TextInput} from 'react-native-paper';
 import dayjs from 'dayjs';
 import {useRecoilState} from 'recoil';
@@ -9,12 +9,17 @@ import testState from 'store/test';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 import tw from 'twrnc';
+import {useTranslation} from 'react-i18next';
+import useAuth from 'hooks/useAuth';
 
-export default function User() {
+export default function User({navigation}: any) {
+  const {t} = useTranslation();
+
   const [visible, setVisible] = useState(false);
   const [text, setText] = useRecoilState(testState);
 
-  const {data} = useSWR({url: 'todos', params: {_limit: 10}});
+  const {logout} = useAuth();
+  const {data} = useSWR({url: 'todos', params: {_limit: 4}});
 
   const {trigger} = useSWRMutation('todos', Service.post, {
     onSuccess: () => setVisible(!visible),
@@ -47,25 +52,29 @@ export default function User() {
   };
 
   return (
-    <View>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Button icon="camera" mode="contained" onPress={handleCreateTodo}>
-          Press me
-        </Button>
+    <View style={tw`bg-red-400`}>
+      <Button
+        icon="menu"
+        mode="contained"
+        onPress={() => navigation.openDrawer()}>
+        Open drawer
+      </Button>
 
-        <Text
-          style={tw`mt-3 bg-yellow-500 font-bold text-xl py-3 text-red-600`}>
-          {text} Today is {dayjs().format('YYYY-MM-DD HH:mm')}
-        </Text>
+      <Button icon="camera" mode="contained" onPress={handleCreateTodo}>
+        Press me
+      </Button>
 
-        <Button icon="camera" mode="contained" onPress={handleChangeText}>
-          Press me
-        </Button>
+      <Text style={tw`mt-3 bg-yellow-500 font-bold text-xl py-3 text-red-600`}>
+        {text} Today is {dayjs().format('YYYY-MM-DD HH:mm')}
+      </Text>
 
-        {data?.map((item: any) => (
-          <Menu.Item key={item.id} leadingIcon="redo" title={item.title} />
-        ))}
-      </ScrollView>
+      <Button icon="camera" mode="contained" onPress={handleChangeText}>
+        Press me
+      </Button>
+
+      {data?.map((item: any) => (
+        <Menu.Item key={item.id} leadingIcon="redo" title={item.title} />
+      ))}
 
       <View>
         <Controller
@@ -103,6 +112,11 @@ export default function User() {
 
         <Button mode="outlined" onPress={handleSubmit(onSubmit)}>
           Submit
+        </Button>
+
+        <Text>{t('common:hello')}</Text>
+        <Button mode="outlined" onPress={logout}>
+          Logout
         </Button>
       </View>
 

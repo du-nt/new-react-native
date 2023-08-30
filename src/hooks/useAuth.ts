@@ -21,6 +21,7 @@ export default function useAuth(
     {url: 'posts/1'},
     {
       dedupingInterval: 60 * 60 * 1000, // 1hr
+      revalidateOnMount: false,
       ...options,
     },
   );
@@ -52,7 +53,7 @@ export default function useAuth(
   const logout = useCallback(async () => {
     try {
       const refreshToken = await getTokens();
-      Service.post('v1/auth/logout', {
+      await Service.post('v1/auth/logout', {
         refreshToken,
       });
     } catch (err) {
@@ -65,13 +66,15 @@ export default function useAuth(
 
   useEffect(() => {
     const initialize = async () => {
-      if (!firstLoading) {
-        await RNBootSplash.hide({fade: true, duration: 500});
+      if (options?.revalidateOnMount) {
+        if (!firstLoading) {
+          await RNBootSplash.hide({fade: true, duration: 500});
+        }
       }
     };
 
     initialize();
-  }, [firstLoading]);
+  }, [firstLoading, options?.revalidateOnMount]);
 
   return {
     profile,
