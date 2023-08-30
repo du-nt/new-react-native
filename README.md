@@ -5,8 +5,8 @@
 
 ## はじめに
 
-1. `git clone https://@bitbucket.org/work-house/digitori360-app.git`
-2. `cd digitori360-app`
+1. `git clone https://github.com/du-nt/new-react-native`
+2. `cd new-react-native`
 3. 下記ポートフォワーディングする
 
 - DEV
@@ -16,6 +16,12 @@
      ```bash
      # 依存関係をインストールする
      $ yarn install
+
+     # Rename app name
+     $ npx react-native-rename "new_name"
+
+     # Pod install
+     $ cd ios && pod install && cd ..
 
      # コマンド実行
      $ yarn start
